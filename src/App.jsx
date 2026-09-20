@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -29,6 +30,19 @@ function App() {
         </div>
       </main>
       <Footer />
+=======
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+
+// Main App component containing routes and layout structure
+function App() {
+  return (
+    <Router>
+      {/* Navbar will stay fixed or visible on top of all pages */}
+      <Navbar />
+      <Hero />
+>>>>>>> ed1ad001c24cfab71508c0c925528c1d1deafe04
     </Router>
   );
 }
