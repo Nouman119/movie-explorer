@@ -1,47 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Hero component designed with a clean, modern light theme for the Home page
+// Hero component representing the main landing banner with a movie-themed background
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-white to-gray-100 text-gray-900 py-28 px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[75vh]">
+    <div className="relative bg-slate-900 text-white overflow-hidden py-24 sm:py-32">
       
-      {/* Decorative background blur shapes for modern aesthetics */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+      {/* Background Image with Gradient Overlay for Light/Dark Theme Balance */}
+      <div className="absolute inset-0 z-0 opacity-30">
+        <img 
+          src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop" 
+          alt="Movie Background" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-slate-950"></div>
+      </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 max-w-4xl text-center">
-        
-        {/* Badge or mini tag */}
-        <span className="inline-block bg-red-50 text-red-600 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-red-200 shadow-sm">
-          🎬 Discover Your Next Favorite Show
+      {/* Hero Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span className="inline-block bg-red-600/20 text-red-400 border border-red-500/30 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
+          The Ultimate Streaming Experience
         </span>
-
-        {/* Main Heading */}
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-gray-900 mb-6 leading-tight">
-          Explore and Discover <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500">
-            World-Class Movies
-          </span>
+        
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+          DISCOVER <span className="text-red-500">MOVIES</span>
         </h1>
-
-        {/* Subheading */}
-        <p className="text-base sm:text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Dive into an extensive collection of movies and TV shows from around the globe. Fast, intuitive, and designed for true cinema lovers.
+        
+        <p className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 leading-relaxed">
+          Explore and discover your favorite movies and TV shows from around the world. Streamline your entertainment with instant search and detailed insights.
         </p>
 
-        {/* Call to Action (CTA) Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Call to Action Button */}
+        <div>
           <Link
             to="/movies"
-            className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 transition-all duration-300 transform hover:-translate-y-0.5"
+            className="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-red-600/40 transition-all duration-300 transform hover:-translate-y-1 text-base"
           >
-            Explore Movies Now
+            Explore Now
           </Link>
         </div>
-
       </div>
-    </section>
+    </div>
   );
 };
 
