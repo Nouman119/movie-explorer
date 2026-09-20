@@ -73,7 +73,7 @@ const MovieListingPage = () => {
           />
           <button
             type="submit"
-            className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3 rounded-xl shadow-sm transition-all duration-200 text-sm flex-shrink-0"
+            className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3 rounded-xl shadow-sm transition-all duration-200 text-sm shrink-0"
           >
             Search
           </button>

@@ -1,36 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Hero component representing the main landing banner with a movie-themed background
+// Hero component featuring full screen view layout and custom background
 const Hero = () => {
   return (
-    <div className="relative bg-slate-900 text-white overflow-hidden py-24 sm:py-32">
+    <div className="relative bg-slate-900 text-white overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       
-      {/* Background Image with Gradient Overlay for Light/Dark Theme Balance */}
-      <div className="absolute inset-0 z-0 opacity-30">
+      {/* Custom Background Image with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop" 
-          alt="Movie Background" 
-          className="w-full h-full object-cover"
+          src="/hero-bg.webp" 
+          alt="Movie Hero Background" 
+          className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-slate-950"></div>
+        {/* Gradient overlay for better contrast and text readability */}
+        <div className="absolute inset-0 bg-linear-to-r from-slate-950/90 via-slate-900/70 to-slate-950/90"></div>
       </div>
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="inline-block bg-red-600/20 text-red-400 border border-red-500/30 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
-          The Ultimate Streaming Experience
-        </span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
         
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
-          DISCOVER <span className="text-red-500">MOVIES</span>
+          DISCOVER <span className="text-red-600">MOVIES</span>
         </h1>
         
         <p className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 leading-relaxed">
-          Explore and discover your favorite movies and TV shows from around the world. Streamline your entertainment with instant search and detailed insights.
+          Explore and discover your favorite movies from around the world.
         </p>
 
-        {/* Call to Action Button */}
+        {/* Call-to-Action Button */}
         <div>
           <Link
             to="/movies"
@@ -39,6 +37,7 @@ const Hero = () => {
             Explore Now
           </Link>
         </div>
+
       </div>
     </div>
   );
