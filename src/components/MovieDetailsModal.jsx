@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Star, Calendar, Film, Globe } from 'lucide-react';
 
-// MovieDetailsModal component with lucide icons styled in pure black (#000000)
+// MovieDetailsModal component displaying comprehensive movie information with clean syntax
 const MovieDetailsModal = ({ movie, onClose }) => {
   if (!movie) return null;
 
@@ -32,7 +32,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         
-        {/* Close Button with Black Icon */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           aria-label="Close modal"
@@ -58,7 +58,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             {movie.name}
           </h2>
 
-          {/* Metadata Grid with Pure Black Icons (#000000) */}
+          {/* Metadata Grid with Pure Black Icons */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-gray-50 p-4 rounded-xl border border-gray-200/60 text-xs sm:text-sm">
             
             {/* Rating */}

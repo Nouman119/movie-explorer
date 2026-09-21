@@ -22,7 +22,7 @@ const MovieCard = ({ movie, onOpenDetails }) => {
       </div>
 
       {/* Card Body Section */}
-      <div className="p-4 flex flex-col flex-grow justify-between">
+      <div className="p-4 flex flex-col grow justify-between">
         <div>
           {/* Movie Title */}
           <h3 className="text-base font-bold text-gray-900 truncate mb-2" title={title}>
