@@ -11,7 +11,7 @@ const Hero = () => {
         <img 
           src="/hero-bg.webp" 
           alt="Movie Hero Background" 
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover "
         />
         {/* Gradient overlay for better contrast and text readability */}
         <div className="absolute inset-0 bg-linear-to-r from-slate-950/90 via-slate-900/70 to-slate-950/90"></div>

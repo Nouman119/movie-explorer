@@ -4,19 +4,20 @@ import MovieCard from '../components/MovieCard';
 import MovieDetailsModal from '../components/MovieDetailsModal';
 import { Search, ChevronLeft, ChevronRight, Film } from 'lucide-react';
 
-// MovieListingPage component featuring search functionality and clean pagination support
+// MovieListingPage component updated to trigger search strictly on form submission (Enter key or button click)
 const MovieListingPage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // Stores the submitted search query
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 12; // Number of movies to display per page
+  const moviesPerPage = 12;
 
-  // Fetch initial shows or search results based on query
+  // Fetch initial shows or search results based on submitted searchTerm
   useEffect(() => {
     const loadMovies = async () => {
       try {
@@ -24,16 +25,16 @@ const MovieListingPage = () => {
         setError(null);
         let data = [];
 
-        if (query.trim() === '') {
+        if (searchTerm.trim() === '') {
           data = await fetchAllShows();
         } else {
-          const searchResults = await searchShows(query);
+          const searchResults = await searchShows(searchTerm);
           // TVMaze search endpoint returns an array of objects containing { score, show }
           data = searchResults.map((item) => item.show);
         }
 
         setMovies(data);
-        setCurrentPage(1); // Reset to first page on new search/load
+        setCurrentPage(1); // Reset to first page on new data fetch
       } catch (err) {
         setError('Failed to fetch movies. Please try again later.');
       } finally {
@@ -41,12 +42,14 @@ const MovieListingPage = () => {
       }
     };
 
-    const debounceTimer = setTimeout(() => {
-      loadMovies();
-    }, 300);
+    loadMovies();
+  }, [searchTerm]);
 
-    return () => clearTimeout(debounceTimer);
-  }, [query]);
+  // Handle form submission when user presses Enter or clicks search button
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchTerm(query);
+  };
 
   // Calculate pagination indices
   const indexOfLastMovie = currentPage * moviesPerPage;
@@ -66,37 +69,43 @@ const MovieListingPage = () => {
     <div className="min-h-screen bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
-        {/* Page Header & Search Bar Section */}
+        {/* Page Header & Search Form Section */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
               Explore <span className="text-red-600">Movies & Shows</span>
             </h1>
             <p className="text-gray-400 text-sm mt-1">
-              Browse through our extensive collection or search your favorite titles.
+              Type your keyword and press Enter to search through our collection.
             </p>
           </div>
 
-          {/* Search Bar */}
-          <div className="w-full md:w-96 relative">
-            <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+          {/* Search Form triggering search strictly on submit */}
+          <form onSubmit={handleSearchSubmit} className="w-full md:w-96 relative flex items-center">
+            <span className="absolute left-4 pointer-events-none text-gray-400">
               <Search className="w-5 h-5" />
             </span>
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search for a movie or show..."
-              className="w-full pl-11 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-sm shadow-inner"
+              placeholder="Search movies, press Enter..."
+              className="w-full pl-11 pr-24 py-3 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-sm shadow-inner"
             />
-          </div>
+            <button
+              type="submit"
+              className="absolute right-1.5 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-colors shadow-md"
+            >
+              Search
+            </button>
+          </form>
         </div>
 
         {/* Loading State */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-24 space-y-4">
             <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-gray-400 font-medium">Loading amazing movies...</p>
+            <p className="text-gray-400 font-medium">Loading movies...</p>
           </div>
         )}
 
@@ -132,8 +141,6 @@ const MovieListingPage = () => {
             {/* Pagination Controls */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center space-x-3 mt-12 pt-8 border-t border-slate-900">
-                
-                {/* Previous Button */}
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
@@ -143,12 +150,10 @@ const MovieListingPage = () => {
                   Previous
                 </button>
 
-                {/* Page Number Indicator */}
                 <span className="text-sm font-medium text-gray-400 px-3">
                   Page <strong className="text-white">{currentPage}</strong> of <strong className="text-white">{totalPages}</strong>
                 </span>
 
-                {/* Next Button */}
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
@@ -157,7 +162,6 @@ const MovieListingPage = () => {
                   Next
                   <ChevronRight className="w-4 h-4" />
                 </button>
-
               </div>
             )}
           </>

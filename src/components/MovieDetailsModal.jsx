@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Star, Calendar, Film, Globe } from 'lucide-react';
 
-// MovieDetailsModal component with a perfectly fitted poster image without cropping
+// MovieDetailsModal component with lucide icons styled in pure black (#000000)
 const MovieDetailsModal = ({ movie, onClose }) => {
   if (!movie) return null;
 
@@ -32,17 +32,17 @@ const MovieDetailsModal = ({ movie, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         
-        {/* Close Button */}
+        {/* Close Button with Black Icon */}
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-colors shadow-md"
+          className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-black flex items-center justify-center transition-colors shadow-md"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5 text-[#000000]" />
         </button>
 
-        {/* Properly Fitted Image Section using object-contain */}
-        <div className="relative h-64 sm:h-72 w-full bg-black overflow-hidden flex items-center justify-center shrink-0">
+        {/* Poster Image Section using object-contain */}
+        <div className="relative h-64 sm:h-72 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
           <img 
             src={posterImage} 
             alt={movie.name} 
@@ -51,52 +51,58 @@ const MovieDetailsModal = ({ movie, onClose }) => {
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="p-6 space-y-4 overflow-y-auto">
+        <div className="p-6 space-y-5 overflow-y-auto">
           
           {/* Movie Title */}
           <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
             {movie.name}
           </h2>
 
-          {/* Metadata Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-50 p-3.5 rounded-xl border border-gray-200/60 text-xs sm:text-sm">
-            <div className="flex items-center gap-2">
-              <Star className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
-              <div>
-                <p className="text-gray-400 font-medium uppercase text-[10px]">Rating</p>
-                <p className="font-bold text-gray-800">{rating}</p>
+          {/* Metadata Grid with Pure Black Icons (#000000) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-gray-50 p-4 rounded-xl border border-gray-200/60 text-xs sm:text-sm">
+            
+            {/* Rating */}
+            <div className="flex items-start gap-2.5">
+              <Star className="w-4 h-4 text-[#000000] fill-[#000000] flex-shrink-0 mt-0.5" />
+              <div className="min-w-0">
+                <p className="text-gray-500 font-semibold uppercase text-[10px] tracking-wider">Rating</p>
+                <p className="font-bold text-gray-900 mt-0.5">{rating}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-red-500 shrink-0" />
-              <div>
-                <p className="text-gray-400 font-medium uppercase text-[10px]">Premiered</p>
-                <p className="font-bold text-gray-800">{premiered}</p>
+            {/* Premiered */}
+            <div className="flex items-start gap-2.5">
+              <Calendar className="w-4 h-4 text-[#000000] flex-shrink-0 mt-0.5" />
+              <div className="min-w-0">
+                <p className="text-gray-500 font-semibold uppercase text-[10px] tracking-wider">Premiered</p>
+                <p className="font-bold text-gray-900 mt-0.5">{premiered}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Film className="w-4 h-4 text-blue-500 shrink-0" />
-              <div>
-                <p className="text-gray-400 font-medium uppercase text-[10px]">Genres</p>
-                <p className="font-bold text-gray-800 truncate" title={genres}>{genres}</p>
+            {/* Genres */}
+            <div className="flex items-start gap-2.5">
+              <Film className="w-4 h-4 text-[#000000] flex-shrink-0 mt-0.5" />
+              <div className="min-w-0">
+                <p className="text-gray-500 font-semibold uppercase text-[10px] tracking-wider">Genres</p>
+                <p className="font-bold text-gray-900 mt-0.5 truncate" title={genres}>{genres}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Globe className="w-4 h-4 text-emerald-500 shrink-0" />
-              <div>
-                <p className="text-gray-400 font-medium uppercase text-[10px]">Language</p>
-                <p className="font-bold text-gray-800">{language}</p>
+            {/* Language */}
+            <div className="flex items-start gap-2.5">
+              <Globe className="w-4 h-4 text-[#000000] flex-shrink-0 mt-0.5" />
+              <div className="min-w-0">
+                <p className="text-gray-500 font-semibold uppercase text-[10px] tracking-wider">Language</p>
+                <p className="font-bold text-gray-900 mt-0.5 truncate" title={language}>{language}</p>
               </div>
             </div>
+
           </div>
 
           {/* Overview Section */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Overview</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Overview</h3>
+            <p className="text-gray-700 text-sm leading-relaxed">
               {summaryText}
             </p>
           </div>

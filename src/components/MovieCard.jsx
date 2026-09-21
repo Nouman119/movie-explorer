@@ -1,51 +1,53 @@
 import React from 'react';
+import { Star, Calendar } from 'lucide-react';
 
-// Reusable MovieCard component to display individual movie/show details in a grid
+// MovieCard component displaying professional icons for rating and release year
 const MovieCard = ({ movie, onOpenDetails }) => {
-  // Extracting safe fallback values from TVMaze API data structure
-  const imageUrl = movie.image?.medium || 'https://via.placeholder.com/210x295?text=No+Image';
-  const title = movie.name || 'Untitled Movie';
-  const rating = movie.rating?.average ? movie.rating.average : 'N/A';
-  const releaseYear = movie.premiered ? movie.premiered.split('-')[0] : 'N/A';
+  // Safely extract movie details with fallback values
+  const title = movie.name || 'Untitled';
+  const rating = movie.rating?.average || 'N/A';
+  const premiered = movie.premiered ? movie.premiered.substring(0, 4) : 'N/A';
+  const posterImage = movie.image?.medium || movie.image?.original || 'https://via.placeholder.com/300x450?text=No+Image';
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200/80 overflow-hidden transition-all duration-300 flex flex-col justify-between group">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       
-      {/* Movie Poster Container */}
-      <div className="relative overflow-hidden bg-gray-100 aspect-2/3">
+      {/* Movie Poster Image Container */}
+      <div className="relative h-64 sm:h-72 w-full bg-slate-900 overflow-hidden">
         <img 
-          src={imageUrl} 
+          src={posterImage} 
           alt={title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
-      {/* Card Content Area */}
-      <div className="p-5 flex flex-col grow justify-between">
+      {/* Card Body Section */}
+      <div className="p-4 flex flex-col flex-grow justify-between">
         <div>
           {/* Movie Title */}
-          <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-1 group-hover:text-red-600 transition-colors">
+          <h3 className="text-base font-bold text-gray-900 truncate mb-2" title={title}>
             {title}
           </h3>
-
-          {/* Rating and Release Year Info */}
-          <div className="flex items-center text-sm text-gray-600 mb-4 space-x-3">
-            <span className="flex items-center font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
-              ★ {rating}
-            </span>
-            <span className="flex items-center text-gray-500">
-              📅 {releaseYear}
-            </span>
+          
+          {/* Rating and Premiered Year with Professional Lucide Icons */}
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
+            <div className="flex items-center gap-1.5">
+              <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+              <span className="font-semibold text-gray-800">{rating}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-gray-400" />
+              <span className="font-medium text-gray-700">{premiered}</span>
+            </div>
           </div>
         </div>
 
-        {/* See Details Button */}
+        {/* See Details Action Button */}
         <button
           onClick={() => onOpenDetails(movie)}
-          className="w-full mt-2 bg-gray-900 hover:bg-red-600 text-white font-medium py-2.5 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 text-sm flex items-center justify-center space-x-2"
+          className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl text-xs transition-colors shadow-sm"
         >
-          <span>See Details</span>
+          See Details
         </button>
       </div>
 
